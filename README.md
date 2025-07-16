@@ -62,7 +62,7 @@ export interface IProduct {
   image:string;
   title:string;
   category: categoryProduct;
-  price:number;
+  price:number | null;
 }
 ```
 
@@ -93,7 +93,7 @@ export interface IUser {
 
 ```
 export interface IOrder extends IUser  {
-  products: string[];
+  items: string[];
   total:number;
 }
 ```
