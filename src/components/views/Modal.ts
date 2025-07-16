@@ -1,27 +1,30 @@
 
 import { Component } from "../base/Component";
-import { IModalData } from "../../types";
-import { ensureElement } from "../../utils/utils";
 import { IEvents } from "../base/events";
+import { ensureElement } from "../../utils/utils";
 
+
+interface IModalData {
+    content: HTMLElement;
+}
 
 export class Modal extends Component<IModalData> {
-    protected _closeButton: HTMLButtonElement;
-    protected _content: HTMLElement;
+    protected closeButton: HTMLButtonElement;
+    protected contentElement: HTMLElement;
 
     constructor(container: HTMLElement, protected events: IEvents) {
         super(container);
 
-        this._closeButton = ensureElement<HTMLButtonElement>('.modal__close', container);
-        this._content = ensureElement<HTMLElement>('.modal__content', container);
+        this.closeButton = ensureElement<HTMLButtonElement>('.modal__close', this.container);
+        this.contentElement = ensureElement<HTMLElement>('.modal__content', this.container);
 
-        this._closeButton.addEventListener('click', this.close.bind(this));
+        this.closeButton.addEventListener('click', this.close.bind(this));
         this.container.addEventListener('click', this.close.bind(this));
-        this._content.addEventListener('click', (event) => event.stopPropagation());
+        this.contentElement.addEventListener('click', (event) => event.stopPropagation());
     }
 
     set content(value: HTMLElement) {
-        this._content.replaceChildren(value);
+        this.contentElement.replaceChildren(value);
     }
 
     open() {

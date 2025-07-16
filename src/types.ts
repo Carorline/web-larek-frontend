@@ -13,7 +13,7 @@ export interface IProduct {
   image:string;
   title:string;
   category: categoryProduct;
-  price:number;
+  price:number | null;
 }
 
 // Описание возможных способов оплаты
@@ -34,7 +34,7 @@ export type IProductBasket = Pick<IProduct,'id' | 'title'| 'price'>;
 // Интерфейс для заказа
 // Содержит информацию о заказе и список товаров
 export interface IOrder extends IUser  {
-  products: string[];
+  items: string[];
   total:number;
 }
 
@@ -77,7 +77,6 @@ export interface IProductBasketModel {
 // Интерфейс для обработки данных пользователя
 export interface IUserModel {
   user: IUser;
-  formErrors: IFormErrors;
   getUserData():IOrder; // Возвращает объект для API
   setData(data: keyof IUser, value: string | paymentMethod	): void; // Обновляет любое поле заказа
   validationData(data:Record<keyof IUser, string>):boolean; // Проводит валидацию всех полей
