@@ -78,10 +78,10 @@ export interface IProductBasketModel {
 export interface IUserModel {
   user: IUser;
   formErrors: IFormErrors;
-  getUserData():IOrder;
-  setData(data: keyof IUser, value: string | paymentMethod	): void;
-  validationData(data:Record<keyof IUser, string>):boolean;
-  clear():void;
+  getUserData():IOrder; // Возвращает объект для API
+  setData(data: keyof IUser, value: string | paymentMethod	): void; // Обновляет любое поле заказа
+  validationData(data:Record<keyof IUser, string>):boolean; // Проводит валидацию всех полей
+  clear():void; //Очистка данных заказа
 }
 
 // Интерфейс для API карточек товаров
