@@ -9,64 +9,32 @@ export type categoryProduct =
 // Интерфейс для карточки товара
 export interface IProduct {
   id: string;
-  description?: string;
+  description: string;
   image:string;
   title:string;
   category: categoryProduct;
   price:number;
 }
 
-// Интерфейс для списка карточек товаров
-export interface IProductList {
-	total: number;
-	items: IProduct[];
-}
-
-// Интерфейс для каталога карточек товаров
-export interface IProductsData {
-  products: IProduct[];
-  preview: string | null;
-  getProduct(productId:string):IProduct | undefined; 
-  setProducts(products: IProduct[]):void;
-}
-
-// Интерфейс для корзины товаров
-// Содержит только необходимые поля для отображения в корзине
-export type IProductBasket = Pick<IProduct,'id' | 'title'| 'price'>;
-
-// Интерфейс для управления корзиной товаров
-export interface IProductBasketData {
-  getProducts(): IProductBasket[];
-  addProduct(product: IProductBasket): void;
-  removeProduct(productId: string): void;
-  clearBasket():void;
-  getTotalPrice(): number;
-  getCount(): number;
-}
-
 // Описание возможных способов оплаты
-export type paymentMethod = 'online' | 'cash';
+export type paymentMethod = 'online' | 'cash' | '';
 
-// Интерфейс для информации о заказе
-export interface IOrderInfo {
+// Интерфейс для информации о покупателе
+export interface IUser {
   payment: paymentMethod;
   address: string;
   email: string;
   phone: string;
 }
 
-// Интерфейс для оформления заказа (шаг 1)
-// Содержит только необходимые поля для отображения
-export type IOrderStep1 = Pick<IOrderInfo, 'payment'| 'address'>;
-
-// Интерфейс для оформления заказа (шаг 2)
-// Содержит только необходимые поля для отображения
-export type IOrderStep2 = Pick<IOrderInfo, 'email'| 'phone'>;
+// Интерфейс для корзины товаров
+// Содержит только необходимые поля для отображения в корзине
+export type IProductBasket = Pick<IProduct,'id' | 'title'| 'price'>;  
 
 // Интерфейс для заказа
 // Содержит информацию о заказе и список товаров
-export interface IOrder extends IOrderInfo  {
-  items: string[];
+export interface IOrder extends IUser  {
+  products: string[];
   total:number;
 }
 
@@ -78,17 +46,42 @@ export type IFormErrors = Partial<Record<keyof IOrder, string>>;
 export interface IOrderResult {
   id: string;
   total:number
+} 
+
+// Интерфейс для списка карточек товаров, полученный через API
+export interface IProductList {
+	total: number;
+	items: IProduct[];
 }
 
-// Интерфейс для оформления заказа
-export interface IOrderData {
-  order: IOrder;
+// Интерфейс для каталога карточек товаров
+export interface IProductCatalogModel {
+  getProducts(): IProduct[]; //Список товаров
+  setProducts(products: IProduct[]):void; // Сохранить массив товаров
+  getProduct(productId:string): IProduct | undefined; // Получить выбранную карточку
+  setPreview(product:IProduct): void; // Сохранить выбранную карточку
+  getPreview(): IProduct | null; // Объект товара для превью
+}
+
+// Интерфейс для управления корзиной товаров
+export interface IProductBasketModel {
+  getProducts(): IProductBasket[]; // Список товаров
+  addProduct(product: IProductBasket): void; // Добавить товар
+  removeProduct(productId: string): void; // Удалить товар
+  clearBasket():void; // Очистить корзину
+  getTotal(): number; // Сумма стоимости товаров
+  getCount(): number; // Количество товаров
+  hasProduct(productId: string): boolean; // Наличие товара
+}
+
+// Интерфейс для обработки данных пользователя
+export interface IUserModel {
+  user: IUser;
   formErrors: IFormErrors;
-  setFieldStep1(field:IOrderStep1): void;
-  setFieldStep2(field:IOrderStep2): void;
-  validationOrderStep1(field:Record<keyof IOrderStep1, string>):boolean;
-  validationOrderStep2(field:Record<keyof IOrderStep2, string>):boolean;
-  clearOrder():void;
+  getUserData():IOrder;
+  setData(data: keyof IUser, value: string | paymentMethod	): void;
+  validationData(data:Record<keyof IUser, string>):boolean;
+  clear():void;
 }
 
 // Интерфейс для API карточек товаров
@@ -133,11 +126,6 @@ export interface ICardActions {
 	onClick: (event: MouseEvent) => void;
 }
 
-// Данные, требуемые карточке
-export type ICard = Pick<IProduct, 'id' | 'title' | 'price'> &
-	Partial<Pick<IProduct, 'image' | 'category' | 'description'>> & {
-		button?: string;
-	};
 
 // Карточка товара в корзине
 export interface ICardBasketActions {

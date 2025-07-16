@@ -58,31 +58,11 @@ export type categoryProduct =
 ```
 export interface IProduct {
   id: string;
-  description?: string;
+  description: string;
   image:string;
   title:string;
   category: categoryProduct;
   price:number;
-}
-```
-
-Cписок карточек товаров
-
-```
-export interface IProductList {
-	total: number;
-	items: IProduct[];
-}
-```
-
-Каталог карточек товаров
-
-```
-export interface IProductsData {
-  products: IProduct[];
-  preview: string | null;
-  getProduct(productId:string):IProduct | undefined; 
-  setProducts(products: IProduct[]):void;
 }
 ```
 
@@ -92,29 +72,16 @@ export interface IProductsData {
 export type IProductBasket = Pick<IProduct,'id' | 'title'| 'price'>;
 ```
 
-Управление корзиной товаров
-
-```
-export interface IProductBasketData {
-  getProducts(): IProductBasket[];
-  addProduct(product: IProductBasket): void;
-  removeProduct(productId: string): void;
-  clearBasket():void;
-  getTotalPrice(): number;
-  getCount(): number;
-}
-```
-
 Возможные  способы оплаты
 
 ```
-export type paymentMethod = 'online' | 'cash';
+export type paymentMethod = 'online' | 'cash' | '';
 ```
 
-Информация о заказе
+Информация о покупателе
 
 ```
-export interface IOrderInfo {
+export interface IUser {
   payment: paymentMethod;
   address: string;
   email: string;
@@ -122,24 +89,11 @@ export interface IOrderInfo {
 }
 ```
 
-Оформление заказа (шаг 1) содержит только необходимые поля для отображения
-
-```
-export type IOrderStep1 = Pick<IOrderInfo, 'payment'| 'address'>;
-```
-
-Оформление заказа (шаг 2) содержит только необходимые поля для отображения
-
-```
-export type IOrderStep2 = Pick<IOrderInfo, 'email'| 'phone'>;
-```
-
-
 Заказ
 
 ```
-export interface IOrder extends IOrderInfo  {
-  items: string[];
+export interface IOrder extends IUser  {
+  products: string[];
   total:number;
 }
 ```
@@ -156,20 +110,6 @@ export type IFormErrors = Partial<Record<keyof IOrder, string>>;
 export interface IOrderResult {
   id: string;
   total:number;
-}
-```
-
-Оформления заказа
-
-```
-export interface IOrderData {
-  order: IOrder;
-  formErrors: IFormErrors;
-  setFieldStep1(field:IOrderStep1): void;
-  setFieldStep2(field:IOrderStep2): void;
-  validationOrderStep1(field:Record<keyof IOrderStep1, string>):boolean;
-  validationOrderStep2(field:Record<keyof IOrderStep2, string>):boolean;
-  clearOrder():void;
 }
 ```
 
@@ -220,44 +160,48 @@ export interface IOrderData {
 
 ### Слой данных
 
-#### Класс ProductsData
+#### Класс ProductCatalog
 Класс отвечает за хранение и логику работы с данными карточек товаров.\
-Конструктор класса приниимает инстант брокера событий.\
+Конструктор класса приниимает инстанс брокера событий.\
 В полях класса хранятся следующие данные:
-- _Products: IProduct[] - массив объектов карточек товаров
-- _preview: string | null - id карточки товаров, выбранной для просмотра в модальном окне
+- _products: IProduct[] - актуальный список товаров.
+- preview: string | null - id товара, выбранного для превью, либо null
 - events: IEvents - экземпляр класса `EventEmitter` для инициализации событий при изменении данных.
 
 Так же класс предоставляет набор методов для взаимодействия с этими данными:
-- getProduct(productId:string):IProduct | undefined - возвращает карточку по её id
-- setProducts(products: IProduct[]):void - сохраняет данные карточек в классе
-А так же сеттеры и геттеры для сохранения и получения данных из полей класса.
+- getProducts(): IProduct[] - возвращает копию массива
+- setProducts(products: IProduct[]):void - сохраняет массив товаров
+- getProduct(productId:string): IProduct | undefined - ищет товар по id
+- setPreview(product:IProduct): void - устанавливает текущий товар-превью
+- getPreview(): IProduct | null — возвращает объект товара для превью
 
-#### Класс ProductBasketData
-Класс отвечает за хранение и логику работы с данными карточек товаров в корзине.\
-Конструктор класса приниимает инстант брокера событий.\
+#### Класс ProductBasket
+Класс отвечает за набор выбранных товаров.\
+Конструктор класса приниимает инстанс брокера событий.\
+В поле класса хранятся следующие данные:
+ - _products: IProductBasket[];
 Так же класс предоставляет набор методов для взаимодействия с данными:
-- getProducts(): IProductBasket[] - возвращает основные данные карточки, отображаемые в корзине
+- getProducts(): IProductBasket[] -  массив позиций корзины
 - addProduct(product: IProductBasket): void - добавляет один товар и вызывает событие изменения массива
 - removeProduct(productId: string): void - удаляет один товар и вызывает событие изменения массива
 - clearBasket():void - очистка корзины товаров
-- getTotalPrice(): number - возвращает сумму всех товаров в корзине
-- getCount(): number - возвращает количество товаров в корзине
+- getTotal(): number - сумма всех товаров в корзине
+- getCount(): number - количество товаров в корзине
+- hasProduct(productId: string): boolean - проверяет наличие товара
 
-### Класс OrderData
-Класс отвечает за хранение и логику работы с данными карточек товаров в корзине.\
-Конструктор класса приниимает инстант брокера событий.\
+### Класс User
+Класс отвечает за хранение данных покупателя, выполняет валидацию.\
+Конструктор класса приниимает инстанс брокера событий.\
 В полях класса хранятся следующие данные:
-- order: IOrder;
-- formErrors: IFormErrors;
+- user: IUser - данные введенные покупателем
+- formErrors: IFormErrors - объект текущих ошибок валидации.
 - events: IEvents - экземпляр класса `EventEmitter` для инициализации событий при изменении данных.
 
 Так же класс предоставляет набор методов для взаимодействия с этими данными:
-- setFieldStep1(field:ICreatOrderStep1): void - сохраняет данные заказа на шаге 1 в классе
-- setFieldStep2(field:ICreatOrderStep2): void - сохраняет данные заказа на шаге 2 в классе
-- validationOrderStep1(field:Record<keyof IOrderStep1, string>):boolean - проверяет объект с данными (шаг 1) на валидность
-- validationOrderStep2(field:Record<keyof IOrderStep2, string>):boolean - проверяет объект с данными (шаг 2) на валидность
-- clearOrder():void -очистка данных заказа
+- getUserData():IOrder - возвращает объект для API
+- setData(data: keyof IUser, value: string | paymentMethod	): void - обновляет любое поле заказа
+- validationData(data:Record<keyof IUser, string>):boolean - проводит валидацию всех полей
+- clear():void -очистка данных заказа
 
 ### Классы представления
 Все классы представления отвечают за оттображение внутри контейнера(DOM-элемент) передаваемых в них данных.
