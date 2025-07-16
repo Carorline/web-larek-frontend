@@ -114,6 +114,15 @@ export interface IFormState {
     errors: string[];
 }
 
+// Шапка страницы
+export interface IHeader {
+  counter: number;
+}
+
+export interface IGallery{
+  catalog: HTMLElement[];
+}
+
 // Главная страница
 export interface IPage {
 	counter: number;
