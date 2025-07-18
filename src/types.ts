@@ -95,49 +95,25 @@ export interface IComponent<T> {
 	render(data?: T): HTMLElement;
 }
 
-// Интерфейс для модального окна
-export interface IModalData {
-    content: HTMLElement;
-}
-
-export interface IModal {
-	content: HTMLElement;
-	open(): void;
-	close(): void;
-	render(data: IModalData): HTMLElement;
-}
- 
-// Интерфейс для любой HTML формы
-export interface IFormState {
-    valid: boolean;
-    errors: string[];
-}
-
 // Шапка страницы
 export interface IHeader {
   counter: number;
 }
 
+// Каталог товаров
 export interface IGallery{
   catalog: HTMLElement[];
 }
 
-// Главная страница
-export interface IPage {
-	counter: number;
-	catalog: HTMLElement[];
-	locked: boolean;
+// Интерфейс для модального окна
+export interface IModalData {
+    content: HTMLElement;
 }
 
-// Карточка товара
-export interface ICardActions {
-	onClick: (event: MouseEvent) => void;
-}
-
-
-// Карточка товара в корзине
-export interface ICardBasketActions {
-	onClick: (event: MouseEvent) => void;
+// Интерфейс для любой HTML формы
+export interface IFormState {
+  valid: boolean;
+  errors: string[];
 }
 
 // Структура данных корзины
