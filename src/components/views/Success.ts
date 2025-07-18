@@ -25,6 +25,6 @@ export class Success extends Component<ISuccess> {
     }
 	 // Устанавливаем общую стоимость заказа
 	set total(value: number) {
-		this.totalElement.textContent = `Списано ${value} синапсов`;
+		this.setText(this.totalElement, `Списано ${value} синапсов`);
 	}
 }

@@ -25,7 +25,7 @@ export class Header extends Component<IHeader> {
 	 * Установить счетчик товаров в корзине
 	 */
 	set counter(value: number) {
-		this.counterElement.textContent = String(value);
+		this.setText(this.counterElement, String(value));
 	}
 
 }

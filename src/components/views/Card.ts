@@ -51,7 +51,7 @@ export class Card<T> extends Component<ICard<T>> {
 	}
 
 	set title(value: string) {
-		this.titleElement.textContent = value;
+		this.setText(this.titleElement, value);
 	}
 
 	get title(): string {
@@ -59,7 +59,7 @@ export class Card<T> extends Component<ICard<T>> {
 	}
 
 	set price(value: string) {
-		this.priceElement.textContent = value ? `${value} синапсов` : 'Не продаётся';
+		this.setText(this.priceElement, value ? `${value} синапсов` : 'Не продаётся');
 		if (this.buttonElement) {
 			this.buttonElement.disabled = !value;
 		}
@@ -107,10 +107,10 @@ export class Card<T> extends Component<ICard<T>> {
 	}
 
 	set description(value: string) {
-		this.descriptionElement.textContent = value;
+		this.setText(this.descriptionElement, value);
 	}
 
 	set button(value: string) {
-		this.buttonElement.textContent = value;
+		this.setText(this.buttonElement, value);
 	}
 }
