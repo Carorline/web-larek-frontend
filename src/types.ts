@@ -114,15 +114,18 @@ export interface IModalData {
 export type TCard = Pick<IProduct, 'id' | 'title' | 'price'> &
 	Partial<Pick<IProduct, 'category' | 'description' | 'image'>> & {
 		button?: string;
-}
+	};
 
 // Тип для карточки товара в каталоге
 export type TCardCatalog = Pick<IProduct, 'image' | 'category'>;
 
 // Тип для карточки товара в модальном окне
-export type TCardPreview = Pick<IProduct, 'image' | 'category' | 'description'> & {
-  button: string;
-}
+export type TCardPreview = Pick<
+	IProduct,
+	'image' | 'category' | 'description'
+> & {
+	button: string;
+};
 
 // Тип для карточки товара в корзине
 export type TCardBasket = Pick<IProduct, 'title' | 'price'>;

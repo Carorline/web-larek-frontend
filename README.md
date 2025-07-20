@@ -198,7 +198,7 @@ export interface IOrderResult {
 Все классы представления отвечают за оттображение внутри контейнера(DOM-элемент) передаваемых в них данных.
 
 #### Класс Header
-Класс отвечает  за отображение и обновление состояния корзины.
+Класс отвечает  за отображение и обновление состояния корзины.\
 Конструктор класса приниимает корневой элемент страницы и экземпляр класса `EventEmitter` для возможности инициации события.
 В полях класса:
 - counterElement: HTMLElement - счетчик товаров в корзине
@@ -232,7 +232,7 @@ export interface IOrderResult {
 Расширяет класс Card. Предназначен для реализации карточки в каталоге товаров.
 В полях класса:
 - imageElement: HTMLImageElement - изображение товара
-- categoryElement: HTMLElement - катогория товара
+- categoryElement: HTMLElement - катогория товара\
 А так же сеттеры для сохранения данных полей класса
 
 #### Класс CardPreview
@@ -241,18 +241,18 @@ export interface IOrderResult {
 - imageElement: HTMLImageElement - изображение товара
 - categoryElement: HTMLElement - катогория товара
 - descriptionElement: HTMLElement - описание товара
-- buttonElement: HTMLButtonElement - кнопка добавить/удалить
+- buttonElement: HTMLButtonElement - кнопка добавить/удалить\
 А так же сеттеры для сохранения данных полей класса
 
 #### Класс CardBasket
 Расширяет класс Card. Предназначен для реализации карточки в корзине.
 В полях класса:
-- buttonElement: HTMLButtonElement - кнопка удалить
+- buttonElement: HTMLButtonElement - кнопка удалить\
 А так же сеттеры для сохранения данных полей класса
 
 #### Класс Form<T>
 Реализует общий компонент формы. Предоставляет базовые методы и сеттеры для работы с отображнем элементов формы.\
-Конструктор класса приниимает корневой элемент формы (<form>) и экземпляр класса `EventEmitter` для возможности инициации события.
+Конструктор класса приниимает корневой элемент формы и экземпляр класса `EventEmitter` для возможности инициации события.
 В полях класса:
 - submitElement: HTMLButtonElement - кнопка отправки 
 - errorsElement: HTMLElement - контейнер для ошибок
@@ -266,7 +266,7 @@ export interface IOrderResult {
 В полях класса:
 - paymentCashElement: HTMLButtonElement - кнопка для выбора оплаты наличными
 - paymentCardElement: HTMLButtonElement - кнопка для выбора оплаты картой
-- addressInput: HTMLInputElement - поле ввода адресса
+- addressInput: HTMLInputElement - поле ввода адресса\
 А так же сеттеры для  установка значений полей ввода
 
 #### Класс ContactsForm
@@ -274,7 +274,7 @@ export interface IOrderResult {
 Конструктор класса приниимает корневой элемент формы и экземпляр класса `EventEmitter` для возможности инициации события.\
 В полях класса:
 - emailElement: HTMLInputElement - поле ввода email
-- phoneElement: HTMLInputElement - поле ввода телефона
+- phoneElement: HTMLInputElement - поле ввода телефона\
 А так же сеттеры для  установки значений полей ввода
 
 #### Класс Basket
@@ -283,7 +283,7 @@ export interface IOrderResult {
 В полях класса:
 - listElement: HTMLElement - контейнер для списка товаров
 - totalElement: HTMLElement - элемент для отображения суммы
-- buttonElement: HTMLButtonElement - кнопка оформления заказа
+- buttonElement: HTMLButtonElement - кнопка оформления заказа\
 А так же сеттеры для сохранения данных из полей класса.
 
 #### Класс Success
@@ -291,7 +291,7 @@ export interface IOrderResult {
 Конструктор класса приниимает корневой элемент страницы.\
 В полях класса:
 - closeElement: HTMLButtonElement - кнопка закрытия уведомления
-- totalElement: HTMLElement - элемент для отображения суммы
+- totalElement: HTMLElement - элемент для отображения суммы\
 А так же сеттер для oтображение итоговой суммы списания.
 
 
