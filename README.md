@@ -174,8 +174,8 @@ export interface IOrderResult {
 - products: IProduct[];
 Так же класс предоставляет набор методов для взаимодействия с данными:
 - getProducts(): TProductBasket[] -  массив позиций корзины
-- addProduct(product: TProductBasket): void - добавляет один товар и вызывает событие изменения массива
-- removeProduct(productId: string): void - удаляет один товар и вызывает событие изменения массива
+- addProduct(product: IProduct): void - добавляет один товар и вызывает событие изменения массива
+- removeProduct(product: IProduct): void - удаляет один товар и вызывает событие изменения массива
 - clearBasket():void - очистка корзины товаров
 - getTotal(): number - сумма всех товаров в корзине
 - getCount(): number - количество товаров в корзине
