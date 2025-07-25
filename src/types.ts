@@ -77,9 +77,10 @@ export interface IProductBasketModel {
 // Интерфейс для обработки данных пользователя
 export interface IUserModel {
 	user: IUser;
-	getUserData(): IOrder; // Возвращает объект для API
+	formErrors:TFormErrors
+	// getUserData(): IOrder; // Возвращает объект для API
 	setData(data: keyof IUser, value: string | paymentMethod): void; // Обновляет любое поле заказа
-	validationData(data: Record<keyof IUser, string>): boolean; // Проводит валидацию всех полей
+	validationData(data: Record<keyof IUser, string>): void; // Проводит валидацию всех полей
 	clear(): void; //Очистка данных заказа
 }
 

@@ -18,8 +18,8 @@ export class Card<T> extends Component<ICard<T>> {
   constructor(container: HTMLElement, protected actions?: ICardActions) {
 		super(container);
 
-		this.titleElement = ensureElement<HTMLElement>('.card__title', this.container);
-		this.priceElement = ensureElement<HTMLElement>('.card_price', this.container);
+		this.titleElement = ensureElement('.card__title', this.container);
+		this.priceElement = ensureElement('.card_price', this.container);
     
   	if (actions?.onClick) {
 			this.container.addEventListener('click', actions.onClick);

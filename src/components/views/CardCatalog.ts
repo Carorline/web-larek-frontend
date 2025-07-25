@@ -18,8 +18,8 @@ export class CardCatalog extends Card<TCardCatalog> {
 
   constructor(container: HTMLElement, actions?: ICardActions) {
     super(container);
-    this.categoryElement = ensureElement<HTMLElement>('.card__category', this.container);
-    this.imageElement = ensureElement<HTMLImageElement>('.card__image', this.container);
+    this.categoryElement = ensureElement('.card__category', this.container);
+    this.imageElement = ensureElement('.card__image', this.container) as HTMLImageElement;
 
     if (actions?.onClick) {
       this.container.addEventListener('click', actions.onClick);

@@ -3,9 +3,8 @@ import { IProduct, IProductBasketModel, TProductBasket } from '../../types';
 
 export class ProductBasket implements IProductBasketModel {
   protected products: IProduct[] = [];
-  protected events: IEvents;
 
-  constructor( events: IEvents) {}
+  constructor( protected events: IEvents) {}
 
   getProducts(): TProductBasket[] {
     return this.products.map(product => ({

@@ -16,8 +16,8 @@ export class Success extends Component<ISuccess> {
     constructor(container: HTMLElement, actions: ISuccessActions) {
         super(container);
 
-        this.totalElement = ensureElement<HTMLElement>('.order-success__description', this.container);
-        this.closeElement = ensureElement<HTMLButtonElement>('.order-success__close', this.container);
+        this.totalElement = ensureElement('.order-success__description', this.container);
+        this.closeElement = ensureElement('.order-success__close', this.container) as HTMLButtonElement;
 
         if (actions?.onClick) {
             this.closeElement.addEventListener('click', actions.onClick);

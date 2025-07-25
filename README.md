@@ -189,9 +189,9 @@ export interface IOrderResult {
 - events: IEvents - экземпляр класса `EventEmitter` для инициализации событий при изменении данных.
 
 Так же класс предоставляет набор методов для взаимодействия с этими данными:
-- getUserData():IOrder - возвращает объект для API
+<!-- - getUserData():IOrder - возвращает объект для API -->
 - setData(data: keyof IUser, value: string | paymentMethod	): void - обновляет любое поле заказа
-- validationData(data:Record<keyof IUser, string>):boolean - проводит валидацию всех полей
+- validationData(data:Record<keyof IUser, string>):void - проводит валидацию всех полей
 - clear():void -очистка данных заказа
 
 ### Классы представления

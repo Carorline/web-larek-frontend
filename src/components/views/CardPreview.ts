@@ -30,10 +30,10 @@ export class CardPreview extends Card<TCardPreview> {
   constructor(container: HTMLElement, protected actions?: ICardActions) {
     super(container);
 
-    this.categoryElement = ensureElement<HTMLElement>('.card__category', this.container);
-    this.imageElement = ensureElement<HTMLImageElement>('.card__image', this.container);
-    this.descriptionElement = ensureElement<HTMLElement>('.card__text', this.container);
-    this.buttonElement = ensureElement<HTMLButtonElement>('.card__button', this.container);
+    this.categoryElement = ensureElement('.card__category', this.container);
+    this.imageElement = ensureElement('.card__image', this.container) as HTMLImageElement;
+    this.descriptionElement = ensureElement('.card__text', this.container);
+    this.buttonElement = ensureElement('.card__button', this.container) as HTMLButtonElement;
     
     if (actions?.onClick) {
       if (this.buttonElement) {

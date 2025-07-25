@@ -13,9 +13,9 @@ export class OrderForm extends Form<TOrderForm> {
 	constructor(container: HTMLFormElement, events: IEvents) {
 		super(container, events);
 
-		this.paymentCardElement = ensureElement<HTMLButtonElement>('.button_alt[name=card]', this.container);
-		this.paymentCashElement = ensureElement<HTMLButtonElement>('.button_alt[name=cash]', this.container);
-		this.addressElement = ensureElement<HTMLInputElement>('.form__input[name=address]', this.container);
+		this.paymentCardElement = ensureElement('.button_alt[name=card]', this.container) as HTMLButtonElement;
+		this.paymentCashElement = ensureElement('.button_alt[name=cash]', this.container) as HTMLButtonElement;
+		this.addressElement = ensureElement('.form__input[name=address]', this.container) as HTMLInputElement;
 
 		this.paymentCardElement.addEventListener('click', () => {
 			this.payment = 'card';

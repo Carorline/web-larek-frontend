@@ -10,7 +10,7 @@ export class CardPreview extends Card<TCardBasket> {
   constructor(container: HTMLElement, protected actions?: ICardActions) {
     super(container);
 
-    this.buttonElement = ensureElement<HTMLButtonElement>('.card__button', this.container);
+    this.buttonElement = ensureElement('.card__button', this.container) as HTMLButtonElement;
     
     if (actions?.onClick) {
       if (this.buttonElement) {

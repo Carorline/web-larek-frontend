@@ -4,9 +4,8 @@ import { IProduct, IProductCatalogModel } from '../../types';
 export class ProductCatalog implements IProductCatalogModel {
   protected products: IProduct[] = [];
   protected preview: string | null = null;
-  protected events: IEvents;
 
-  constructor( events: IEvents) {}
+  constructor( protected events: IEvents) {}
 
 
   getProducts(): IProduct[] {
