@@ -6,7 +6,7 @@ import { EventEmitter } from "../base/events";
 interface IBasketView {
     items: HTMLElement[];
     total: number;
-    // selected: string[];
+    selected: string[];
 }
 
 export class Basket extends Component<IBasketView> {
@@ -18,8 +18,8 @@ export class Basket extends Component<IBasketView> {
         super(container);
 
         this.listElement = ensureElement('.basket__list', this.container);
-        this.totalElement = this.container.querySelector('.basket__total');
-        this.buttonElement = this.container.querySelector('.basket__action');
+        this.totalElement = this.container.querySelector('.basket__price');
+        this.buttonElement = this.container.querySelector('.basket__button');
 
         if (this.buttonElement) {
             this.buttonElement.addEventListener('click', () => {
@@ -34,19 +34,19 @@ export class Basket extends Component<IBasketView> {
         if (items.length) {
             this.listElement.replaceChildren(...items);
         } else {
-            this.listElement.replaceChildren(createElement<HTMLParagraphElement>('p', {
+            this.listElement.replaceChildren(createElement('p', {
                 textContent: 'Корзина пуста'
             }));
         }
     }
 
-    // set selected(items: string[]) {
-    //     if (items.length) {
-    //         this.setDisabled(this.buttonElement, false);
-    //     } else {
-    //         this.setDisabled(this.buttonElement, true);
-    //     }
-    // }
+    set selected(items: string[]) {
+        if (items.length) {
+            this.setDisabled(this.buttonElement, false);
+        } else {
+            this.setDisabled(this.buttonElement, true);
+        }
+    }
 
     set total(total: number) {
 		this.setText(this.totalElement, `${total} синапсов`);

@@ -17,8 +17,8 @@ export class ProductCatalog implements IProductCatalogModel {
     this.events.emit('products:changed', this.products);
   }
 
-  getProduct(productId: string): IProduct | undefined {
-    return this.products.find(product => product.id === productId);
+  getProduct(id: string): IProduct | undefined {
+    return this.products.find(product => product.id === id);
   }
 
   setPreview(product: IProduct): void {

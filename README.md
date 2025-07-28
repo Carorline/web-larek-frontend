@@ -163,7 +163,7 @@ export interface IOrderResult {
 Так же класс предоставляет набор методов для взаимодействия с этими данными:
 - getProducts(): IProduct[] - возвращает копию массива
 - setProducts(products: IProduct[]):void - сохраняет массив товаров
-- getProduct(productId:string): IProduct | undefined - ищет товар по id
+- getProduct(id:string): IProduct | undefined - ищет товар по id
 - setPreview(product:IProduct): void - устанавливает текущий товар-превью
 - getPreview(): IProduct | null — возвращает объект товара для превью
 
@@ -175,11 +175,11 @@ export interface IOrderResult {
 Так же класс предоставляет набор методов для взаимодействия с данными:
 - getProducts(): TProductBasket[] -  массив позиций корзины
 - addProduct(product: IProduct): void - добавляет один товар и вызывает событие изменения массива
-- removeProduct(product: IProduct): void - удаляет один товар и вызывает событие изменения массива
+- removeProduct(id: string): void - удаляет один товар и вызывает событие изменения массива
 - clearBasket():void - очистка корзины товаров
 - getTotal(): number - сумма всех товаров в корзине
 - getCount(): number - количество товаров в корзине
-- hasProduct(productId: string): boolean - проверяет наличие товара
+- hasProduct(id: string): boolean - проверяет наличие товара
 
 ### Класс User
 Класс отвечает за хранение данных покупателя, выполняет валидацию.\
@@ -297,7 +297,7 @@ export interface IOrderResult {
 
 ### Слой коммуникации
 
-#### Класс AppApi
+#### Класс WebLarekApi
 Принимает в конструктор экземпляр класса Api и предоставляет методы реализующие взаимодействие с бэкендом сервиса.
 
 ## Взаимодействие компонентов

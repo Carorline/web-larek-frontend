@@ -4,7 +4,7 @@ import { Card, ICardActions } from './Card';
 
 export type TCardBasket = Pick<IProduct, 'title' | 'price'>;
 
-export class CardPreview extends Card<TCardBasket> {
+export class CardBasket extends Card<TCardBasket> {
   protected buttonElement: HTMLButtonElement;
 
   constructor(container: HTMLElement, protected actions?: ICardActions) {

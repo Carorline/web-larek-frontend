@@ -11,7 +11,6 @@ interface IModalData {
 export class Modal extends Component<IModalData> {
     protected closeButton: HTMLButtonElement;
     protected contentElement: HTMLElement;
-    protected pageWrapperElement: HTMLElement;
 
     constructor(container: HTMLElement, protected events: IEvents) {
         super(container);

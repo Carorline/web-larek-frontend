@@ -67,7 +67,7 @@ export interface IProductCatalogModel {
 export interface IProductBasketModel {
 	getProducts(): TProductBasket[]; // Список товаров
 	addProduct(product: IProduct): void; // Добавить товар
-	removeProduct(product: IProduct): void; // Удалить товар
+	removeProduct(productId: string): void; // Удалить товар
 	clearBasket(): void; // Очистить корзину
 	getTotal(): number; // Сумма стоимости товаров
 	getCount(): number; // Количество товаров
