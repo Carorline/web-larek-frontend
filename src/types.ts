@@ -17,7 +17,7 @@ export interface IProduct {
 }
 
 // Описание возможных способов оплаты
-export type paymentMethod = 'card' | 'cash' | '';
+export type paymentMethod = 'card' | 'cash';
 
 // Интерфейс для информации о покупателе
 export interface IUser {
@@ -77,10 +77,8 @@ export interface IProductBasketModel {
 // Интерфейс для обработки данных пользователя
 export interface IUserModel {
 	user: IUser;
-	formErrors:TFormErrors
-	// getUserData(): IOrder; // Возвращает объект для API
 	setData(data: keyof IUser, value: string | paymentMethod): void; // Обновляет любое поле заказа
-	validationData(data: Record<keyof IUser, string>): void; // Проводит валидацию всех полей
+	validationData(): boolean; // Проводит валидацию всех полей
 	clear(): void; //Очистка данных заказа
 }
 
@@ -111,22 +109,15 @@ export interface IModalData {
 	content: HTMLElement;
 }
 
-// Тип для карточки товара
-export type TCard = Pick<IProduct, 'id' | 'title' | 'price'> &
-	Partial<Pick<IProduct, 'category' | 'description' | 'image'>> & {
-		button?: string;
-	};
+export interface ICardActions {
+	onClick: (event: MouseEvent) => void;
+}
 
 // Тип для карточки товара в каталоге
 export type TCardCatalog = Pick<IProduct, 'image' | 'category'>;
 
 // Тип для карточки товара в модальном окне
-export type TCardPreview = Pick<
-	IProduct,
-	'image' | 'category' | 'description'
-> & {
-	button: string;
-};
+export type TCardPreview = Pick<IProduct, 'image' | 'category' | 'description'>;
 
 // Тип для карточки товара в корзине
 export type TCardBasket = Pick<IProduct, 'title' | 'price'>;
@@ -139,9 +130,16 @@ export interface IFormState {
 
 // Структура данных корзины
 export interface IBasketView {
-	items: HTMLElement[];
-	total: number;
+		items: HTMLElement[];
+		total: number;
+		selected: string[];
 }
+
+// Тип для заполнения формы
+export type TOrderForm = Pick<IUser, 'payment'| 'address'>;
+
+// Тип для заполнения формы
+export type TContactsForm = Pick<IUser, 'email' | 'phone'>;
 
 // Окно «Заказ оформлен»
 export interface ISuccess {
@@ -150,16 +148,4 @@ export interface ISuccess {
 
 export interface ISuccessActions {
 	onClick: () => void;
-}
-
-// События, которые могут гинерироваться в системе
-export interface IAppEvents {
-	'items:changed': IProduct[];
-	'basket:open': void;
-	'basket:changed': TProductBasket[];
-	'preview:changed': IProduct;
-	'order:open': void;
-	'formErrors:change': TFormErrors;
-	'modal:open': void;
-	'modal:close': void;
 }

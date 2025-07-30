@@ -1,8 +1,6 @@
 import { ensureElement } from '../../utils/utils';
-import { IProduct } from '../../types';
-import { Card, ICardActions } from './Card';
-
-export type TCardCatalog = Pick<IProduct, 'image' | 'category'>;
+import { ICardActions, TCardCatalog } from '../../types';
+import { Card } from './common/Card';
 
 export class CardCatalog extends Card<TCardCatalog> {
   protected imageElement: HTMLImageElement;

@@ -1,9 +1,7 @@
-import { Form } from './Form';
-import { IUser, paymentMethod } from '../../types';
+import { Form } from './common/Form';
+import {  paymentMethod, TOrderForm } from '../../types';
 import { IEvents } from '../base/events';
 import { ensureElement } from '../../utils/utils';
-
-export type TOrderForm = Pick<IUser, 'payment'| 'address'>;
 
 export class OrderForm extends Form<TOrderForm> {
 	protected paymentCardElement: HTMLButtonElement;
@@ -35,4 +33,14 @@ export class OrderForm extends Form<TOrderForm> {
 	set address(value: string) {
 		this.addressElement.value = value;
 	}
+
+	// render(state: Partial<IUser> & IFormState) {
+	// 	// вызываем базовый рендер для установки адреса/валидности/ошибок
+	// 	super.render(state);
+
+	// 	// state.payment может быть undefined (при первом рендере)
+	// 	if (state.payment === null){
+	// 	return this.container;
+	// 	}
+	// }
 }

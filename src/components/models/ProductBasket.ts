@@ -22,17 +22,17 @@ export class ProductBasket implements IProductBasketModel {
 
     this.products.push(product);
     this.products = [...this.products];
-    this.events.emit('basket:changed', this.getProducts());
+    this.events.emit('basket:change', this.getProducts());
   }
 
   removeProduct(id: string): void {
     this.products = this.products.filter( product => id !== product.id)
-    this.events.emit('basket:changed', this.getProducts());
+    this.events.emit('basket:change', this.getProducts());
   }
 
   clearBasket(): void {
     this.products = [];
-    this.events.emit('basket:changed', this.getProducts());
+    this.events.emit('basket:change');
   }
 
   getTotal(): number {

@@ -1,11 +1,8 @@
-import { Form } from "./Form";
-import { IUser } from "../../types";
-import { IEvents } from '../base/events';
+import { Form } from "./common/Form";
+import { TContactsForm } from "../../types";
+import { IEvents } from '../base/events'; 
 
-
-export type TUserContacts = Pick<IUser, 'email' | 'phone'>; 
-
-export class ContactsForm extends Form<TUserContacts> {
+export class ContactsForm extends Form<TContactsForm> {
     protected emailElement: HTMLInputElement;
     protected phoneElement: HTMLInputElement;
 

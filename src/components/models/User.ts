@@ -8,24 +8,24 @@ export class User implements IUserModel {
 		email: '',
 		phone: '',
 	};
-  formErrors: Partial<Record<keyof IOrder, string>> = {};
 
   constructor( protected events: IEvents) {}
-  
-  // getUserData(): IOrder {
-
-  // };
 
   setData(data: keyof IUser, value: string | paymentMethod): void {
     if (data === 'payment') {
 			this.user[data] = value as paymentMethod;
 		} else {
 			this.user[data] = value as string;
-		}
+		} 
+
+		// Определяем валидность частей формы
+		 if (this.validationData()) {
+            this.events.emit('order:ready', this.user);
+        }
   };
   
-  validationData(data: Record<keyof IUser, string>):void {
-    const errors: typeof this.formErrors = {};
+  validationData():boolean {
+    const errors: Partial<Record<keyof IOrder, string>> = {};
 		if (!this.user.payment) {
 			errors.payment = 'Необходимо выбрать способ оплаты';
 		}
@@ -40,19 +40,8 @@ export class User implements IUserModel {
 			errors.phone = 'Необходимо указать телефон';
 		}
 
-		this.formErrors = errors;
-		this.events.emit('FormErrors:change', this.formErrors);
-		
-    // Определяем валидность частей формы
-		const orderValid = !errors.payment && !errors.address;
-		const contactsValid = !errors.email && !errors.phone;
-
-		if (orderValid) {
-			this.events.emit('order:ready', this.user);
-		}
-		if (contactsValid) {
-			this.events.emit('contacts:ready', this.user);
-		}
+		this.events.emit('formErrors:change', errors);
+		return Object.keys(errors).length === 0;
 	};
 
   clear(): void {
@@ -62,7 +51,5 @@ export class User implements IUserModel {
 			email: '',
 			phone: '',
 		};
-		this.formErrors = {};
-		this.events.emit('user:clear', this.user);
 	}
 }

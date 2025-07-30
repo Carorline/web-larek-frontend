@@ -1,6 +1,6 @@
 import { ensureElement } from '../../utils/utils';
-import { IProduct } from '../../types';
-import { Card, ICardActions } from './Card';
+import { ICardActions, TCardPreview } from '../../types';
+import { Card } from './common/Card';
 
 const categoryMap = {
   'софт-скил': 'Soft Skills',
@@ -9,9 +9,6 @@ const categoryMap = {
   'кнопка': 'Button',
   'хард-скил': 'Hard Skills'
 } as const;
-
-type CategoryKey = keyof typeof categoryMap;
-export type TCardPreview = Pick<IProduct, 'image' | 'category' | 'description'>;
 
 export class CardPreview extends Card<TCardPreview> {
   protected imageElement: HTMLImageElement;
