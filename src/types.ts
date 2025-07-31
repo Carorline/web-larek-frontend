@@ -113,6 +113,12 @@ export interface ICardActions {
 	onClick: (event: MouseEvent) => void;
 }
 
+// Интерфейс для "родительской" карточки
+export interface ICard {
+	title:string;
+	price:number | null;
+}
+
 // Тип для карточки товара в каталоге
 export type TCardCatalog = Pick<IProduct, 'image' | 'category'>;
 

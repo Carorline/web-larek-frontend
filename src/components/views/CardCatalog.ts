@@ -1,18 +1,10 @@
 import { ensureElement } from '../../utils/utils';
-import { ICardActions, TCardCatalog } from '../../types';
+import { categoryProduct, ICardActions, TCardCatalog } from '../../types';
 import { Card } from './common/Card';
 
-export class CardCatalog extends Card<TCardCatalog> {
+export class CardCatalog extends Card implements TCardCatalog {
   protected imageElement: HTMLImageElement;
   protected categoryElement: HTMLElement;
-
-  Category: { [key: string]: string } = {
-		'софт-скил': 'card__category_soft',
-		'хард-скил': 'card__category_hard',
-		'дополнительное': 'card__category_additional',
-		'другое': 'card__category_other',
-		'кнопка': 'card__category_button',
-  };
 
   constructor(container: HTMLElement, actions?: ICardActions) {
     super(container);
@@ -24,14 +16,34 @@ export class CardCatalog extends Card<TCardCatalog> {
     } 
   }
 
-	set category(value: string) {
+	set category(value: categoryProduct) {
 		this.setText(this.categoryElement, value);
-		this.toggleClass(this.categoryElement, this.Category[value], true);
+    this.toggleClass(
+			this.categoryElement,
+			'card__category_soft',
+			value === 'софт-скил'
+		);
+		this.toggleClass(
+			this.categoryElement,
+			'card__category_other',
+			value === 'другое'
+		);
+		this.toggleClass(
+			this.categoryElement,
+			'card__category_additional',
+			value === 'дополнительное'
+		);
+		this.toggleClass(
+			this.categoryElement,
+			'card__category_button',
+			value === 'кнопка'
+		);
+		this.toggleClass(
+			this.categoryElement,
+			'card__category_hard',
+			value === 'хард-скил'
+		);
   }
-
-  get category(): string {
-	return this.categoryElement.textContent || '';
-	}
 
   set image(value: string) {
 		this.setImage(this.imageElement, value, this.title);

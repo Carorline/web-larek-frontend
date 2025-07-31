@@ -2,9 +2,7 @@ import { ensureElement } from '../../utils/utils';
 import { ICardActions, TCardBasket } from '../../types';
 import { Card } from './common/Card';
 
-
-
-export class CardBasket extends Card<TCardBasket> {
+export class CardBasket extends Card  {
   protected buttonElement: HTMLButtonElement;
   protected indexElement : HTMLElement;
 
